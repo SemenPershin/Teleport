@@ -4,15 +4,56 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Rigidbody2D _playerRigidbody;
 
-    // Update is called once per frame
+    [SerializeField] private float _speed = 1f;
+    [SerializeField] private float _hightofJump = 1f;
+
+    [SerializeField] private bool _isGrounded;
+
+
+
     void Update()
     {
-        
+        PlayerJump();
+    
     }
+    void FixedUpdate()
+    {
+        PlayerMove();
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        _isGrounded = true;
+    }
+    void OnCollisionExit2D(Collision2D collision)
+    {
+
+        _isGrounded = false;
+    }
+
+    void PlayerMove()
+    {
+
+        _playerRigidbody.velocity = new Vector2 (0, _playerRigidbody.velocity.y);
+      
+        if (Input.GetKey(KeyCode.D))
+        {
+            _playerRigidbody.velocity = new Vector2(_speed, _playerRigidbody.velocity.y) ;
+        }
+        
+        if (Input.GetKey(KeyCode.A))
+        {
+            _playerRigidbody.velocity = new Vector2(-_speed, _playerRigidbody.velocity.y);
+        }
+       
+    }
+    void PlayerJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+        {
+            _playerRigidbody.AddForce(Vector2.up * _hightofJump, ForceMode2D.Impulse);
+        }
+    }
+    
 }
