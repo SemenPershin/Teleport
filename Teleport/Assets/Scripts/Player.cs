@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float _speed = 1f;
     [SerializeField] private float _hightofJump = 1f;
+    [SerializeField] private float _angleofJump = 45f;
 
     [SerializeField] private bool _isGrounded;
 
@@ -24,7 +25,12 @@ public class Player : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        _isGrounded = true;
+        if(Vector2.Angle(Vector2.up, collision.contacts[0].normal) < _angleofJump)
+        {
+            _isGrounded = true;
+        }
+        
+        
     }
     void OnCollisionExit2D(Collision2D collision)
     {
