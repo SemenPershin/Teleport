@@ -5,10 +5,10 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     [SerializeField] private Transform _playerTransform;
-   // [SerializeField] private float _lerpTime = 1f;
+    [SerializeField] private float _lerpTime = 1f;
     void Update()
     {
-        transform.position = new Vector3(_playerTransform.position.x, _playerTransform.position.y, transform.position.z);
-       
+        transform.position = Vector2.Lerp(transform.position, _playerTransform.position,Time.deltaTime* _lerpTime);
+
     }
 }

@@ -9,21 +9,28 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed = 1f;
     [SerializeField] private float _hightofJump = 1f;
     [SerializeField] private float _angleofJump = 45f;
+    [SerializeField] private float _stepRate = 1f;
+                     private float _timer = 0f;
+    [SerializeField] private float _steptimer = 1f;
+
 
     [SerializeField] private bool _isGrounded;
+    
 
 
 
     void Update()
     {
+        
         PlayerJump();
+        TeleportStep();
     
     }
     void FixedUpdate()
     {
         PlayerMove();
     }
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         if(Vector2.Angle(Vector2.up, collision.contacts[0].normal) < _angleofJump)
         {
@@ -60,6 +67,30 @@ public class Player : MonoBehaviour
         {
             _playerRigidbody.AddForce(Vector2.up * _hightofJump, ForceMode2D.Impulse);
         }
+    }
+
+
+    void TeleportStep()
+    {
+        
+        _timer += Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.LeftShift) && _steptimer < _timer)
+        {
+            
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.position = new Vector2(transform.position.x + _stepRate, transform.position.y);
+                _timer = 0f;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.position = new Vector2(transform.position.x - _stepRate, transform.position.y);
+                _timer = 0f;
+            }
+        }
+        
+
     }
     
 }

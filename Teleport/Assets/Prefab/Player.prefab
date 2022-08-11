@@ -155,6 +155,8 @@ MonoBehaviour:
   _speed: 10
   _hightofJump: 20
   _angleofJump: 45
+  _stepRate: 3
+  _steptimer: 10
   _isGrounded: 0
 --- !u!114 &1604783924189884324
 MonoBehaviour:
@@ -214,7 +216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83042fc86cac7294aa9a17716a47ab51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportBoll: {fileID: 4209561280013968018, guid: 99b0be9fddfac8f4486bfc047f26f4e4, type: 3}
+  _teleportBoll: {fileID: 4209561280013968018, guid: 99b0be9fddfac8f4486bfc047f26f4e4, type: 3}
+  _aimTransform: {fileID: 686182507}
+  _speed: 30
 --- !u!1001 &6921222236615932327
 PrefabInstance:
   m_ObjectHideFlags: 0
